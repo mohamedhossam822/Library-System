@@ -1,45 +1,322 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<CodeBlocks_project_file>
-	<FileVersion major="1" minor="6" />
-	<Project>
-		<Option title="Library Project X" />
-		<Option pch_mode="2" />
-		<Option compiler="gcc" />
-		<Build>
-			<Target title="Debug">
-				<Option output="bin/Debug/Library Project X" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-				</Compiler>
-			</Target>
-			<Target title="Release">
-				<Option output="bin/Release/Library Project X" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
-			</Target>
-		</Build>
-		<Compiler>
-			<Add option="-Wall" />
-		</Compiler>
-		<Unit filename="Book Managment.h" />
-		<Unit filename="main.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-			<lib_finder disable_auto="1" />
-		</Extensions>
-	</Project>
-</CodeBlocks_project_file>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
+void insertnewbook();
+//Global Variables
+int c=0;  /*to count the number of books Registered*/
+int m=0;  /*to count number of members*/
+int b=0;  /*to count number of borrowings*/
+typedef struct   /*Date Structure*/
+{
+    int day;
+    int month;
+    int year;
+}Date;
+typedef struct  /*Address Structure*/
+{
+    int build;
+    char st[50];
+    char city[50];
+}Address;
+struct Books
+{
+    char title[200];
+    char isbn[50];
+    char author[200];
+    char publisher[200];
+    Date book_date_release;
+    int nofcopies;
+    int current_nofcopies;
+    char cat[200];
+}book[100];
+struct Members
+{
+    char name[100];
+    char age;
+    char ID;
+    char tel;
+    Address m_address;
+    char mail[100];
+    int nobor; //Number of borrowings
+}member[100];
+struct Borrowings
+{
+    char Isbn_bor[50];
+    char ID_bor;
+    Date date_borrowed;
+    Date date_due_to_return;
+    Date date_returened;
+}Borrowing[100];
+
+
+                                /*Main Program*/
+
+int main()
+{
+    int choice,ch,a;
+
+while(1)
+{
+//Printing The main menu
+printf("Book Management(1)");
+printf("Member Management(2)");
+printf("Borrow Management(3)");
+printf("Administrative Actions(4)");
+printf("Save Changes(5)");
+printf("Exit(6)");
+printf("Please Enter Your Choice : ");
+scanf("%d",&choice); /*taking user choice and checking it*/
+//Main switch Case
+switch(choice)
+{
+case 1 :          //Book Management menu
+{
+printf("Insert a new book(1)");
+printf("Search for a book(2)");
+printf("Add a new copy(3)");
+printf("Delete book(4)");
+printf("enter your choice : ");
+switch (ch)
+{case 1 :
+insertnewbook();
+break;
+case 2 :
+search();
+break;
+case 3 :
+addnewcopy();
+break;
+case 4 :
+deletebook();
+break;
+default :
+printf("Invalid Input please enter a valid choice from the menu ... ");
+}}break; //Exiting Switch ...
+case 2 :          //Member Management
+{
+printf("Add a new Member(1)");
+printf("Remove member(2)");
+printf("enter your choice::");
+scanf("%d",ch);
+switch (ch)
+{
+case 1 :
+registernewmem();
+break;
+case 2 :
+removeexistmem();
+break;
+default :
+printf("Invalid Input please enter a valid choice from the menu ... ");
+}}break;
+case 3 :          //Borrow Management
+{
+printf("borrow book(1)");
+printf("return book(2)");
+printf("enter your choice : ");
+scanf("%d",&ch);
+switch (ch)
+{
+case 1 :
+borrowbook();
+break;
+case 2 :
+returnbook();
+break;
+default :
+printf("Invalid Input please enter a valid choice from the menu ... ");
+}}break;
+case 4 :          //Administrative Actions
+{
+printf("Overdue book(1)");
+printf("Show most popular books(2)");
+printf("please enter your choice::");
+scanf("%d",&ch);
+switch (ch)
+{
+case 1 :
+overduebooks();
+break;
+case 2 :
+mostpopbooks();
+break;
+default :
+printf("Invalid Input please enter a valid choice from the menu ... ");
+}}break;
+case 5 :          //saving process
+{
+
+}break;
+case 6 :           //Exit process
+{
+
+}
+default :
+    printf("Invalid Input please enter a valid choice from the menu ... ");
+} //Exiting Switch
+}
+return 0;
+}
+//Primary Functions
+                                /*Book Management*/
+void insertnewbook()
+{
+    int n,i;
+    printf("Enter number of books you want to enter : ");
+    scanf("%d",&n);
+    for(i=c;i<(n+c);i++) //Scanning book info.
+    {
+            printf("Enter name of book %d : ",i+1);
+            scanf("%s",&book[i].title);
+            printf("Enter the author name of book %d : ",i+1);
+            scanf("%s",&book[i].author);
+            printf("Enter name of the publisher of book %d : ",i+1);
+            scanf("%s",&book[i].publisher);
+            printf("Enter ISBN of book %d : ",i+1);
+            scanf("%s",&book[i].isbn);
+            printf("Enter date of publication of book %d (DD/MM/YYYY): ",i+1);
+            scanf("%d/%d/%d",&book[i].book_date_release.day,&book[i].book_date_release.month,&book[i].book_date_release.year); //Check the nested structures (Done)
+            printf("enter number of copies of book %d : ",i+1);
+            scanf("%d",&book[i].nofcopies);
+            printf("enter available no of copies of book %d : ",i+1);
+            scanf("%d",&book[i].current_nofcopies);
+            printf("enter the  category of book %d : ",i+1);
+            scanf("%s",&book[i].cat);
+    }
+    c=i;
+    printf("Number of book entered Book Entered %d",c); /*Just to check*/
+}
+void addnewcopy()
+{
+int flag=0,i;
+char temp[50];
+printf("enter the ISBN for the book you want to add a copy from : \n");
+scanf("%s",temp);
+for(i=0;i<c;i++) //Searching for book
+{
+  if(temp==book[i].isbn){printf("enter no. of copies to add : "); flag=1; break;}
+}
+if(flag==1) //if book found
+{
+    book[i].nofcopies++;
+    book[i].current_nofcopies++;
+}
+else printf("Book Not found"); //if book not found
+}
+void deletebook()
+{
+int flag=0,n,i;
+char j;
+char temp[50];
+printf("Enter the ISBN of the book to delete : ");
+scanf("%s",&temp); //Scanning The ISBN of the book
+for(i=0;i<c;i++){
+if(temp==book[i].isbn) {flag=1; break;} //Checking if the book is on the library
+}
+if(flag==1) //Book Found
+{
+    printf("Do you want to delete the entire data of the book and all it's copies(1) OR delete no. of copies(2) ? \n");
+    scanf("%c",&j);
+    if(j=='1') //Deleting all the data about the books from the file
+    {
+    for(;i<(c-1);i++) book[i]=book[i+1];
+    c--;
+    printf("Book Deleted Successfully");
+    }
+    else if(j=='2') //Deleting number of copies but keeping the main data of the book
+    {
+    if(book[i].nofcopies==0)  printf("There are no copies available");
+    else if(book[i].current_nofcopies[i]==0) printf("There are no copies available at the moment");
+    else
+    {
+        printf("There are %d available right now",book[i].current_nofcopies);
+        printf("\nEnter number of copies you like to delete : ")
+        scanf("%d",&n);
+        if(n>book[i].current_nofcopies || n=<0) //Checking number of copies the user want to delete
+            printf("Invalid data,Terminating Process");
+        else //Deleting number of copies
+        {
+            book[i].nofcopies=book[i].nofcopies-n;
+            book[i].current_nofcopies=book[i].current_nofcopies-n;
+        }
+    }
+    }else printf("Invalid Data,Terminating Process");
+}else printf("ISBN not found!"); //Book Not found
+    printf("\nPress any key to Continue\n");
+    getchar();
+}
+/*Edit Function??*/
+                                /*Member Transactions*/
+void addnewmem()
+{
+int n,i;
+printf("enter no of users you want to add :");
+scanf("%d",&n);
+for(i=m;i<(n+m);i++) //Scanning Member Information
+{
+    printf("Information OF User %d",i+1);
+    printf("Enter The name of user : ");
+    scanf("%s",&member[i].name);
+    printf("Enter User phone no::");
+    scanf("%s",&member[i].tel);
+    printf("Enter User Address \n");
+    printf("Building Number : "); scanf("%d",&member[i].m_address.build);
+    printf("street Name : "); scanf("%s",&member[i].m_address.st);
+    printf("city : "); scanf("%s",&member[i].m_address.city);
+    printf("enter User ID : ");
+    scanf("%d",&member[i].ID);
+    printf("enter our age : ");
+    scanf("%d",&member[i].age);
+    printf("enter a Valid email address : ");
+    scanf("%s",&member[i].mail);
+    member[i].nobor=0;
+}}
+void remove_member()
+{
+
+}
+
+                                /*Borrowing and Returning Books*/
+void borrow_book()
+{
+time_t t = time(NULL);   //Some variables for time XD
+struct tm tm = *localtime(&t);
+int i,j,fb=0,fm=0;
+char temp[100],temp2[50];
+printf("Enter User ID and ISBN of book \n");
+printf("Book ISBN : "); scanf("%[^\n]s",&temp);    //Scanning Book ISBN
+printf("User ID   : "); scanf("%[^\n]s",&temp2);  //Scanning User id
+for(i=0;i<c;i++) {if(temp==book[i].isbn) {fb=1; break;}}  //Searching book
+for(j=0;j<m;j++) {if(temp2==member[j].ID) {fm=1; break;}}  //Searching user id
+if(fb==1) //book found
+{
+if(fm==1) //id found
+{
+if(member[j].nobor<3 && member[j].nobor>-1) //if member borrowed more than 3 books
+{
+if(book[i].current_nofcopies>0)   // if there are no available copies
+{
+    printf("Date Borrowed : %d/%d/%d",tm.tm_mday,tm.tm_mon + 1,tm.tm_year + 1900); //Date right now
+    printf("Write 1 to confirm"); scanf("%d",fm);
+    if(fm==1)
+    {
+    printf("Enter Date due to return (dd/mm/yyyy) : ");
+    scanf("%d/%d/%d",&Borrowing[b].date_borrowed.day,&Borrowing[b].date_borrowed.month,&Borrowing[b].date_borrowed.year);
+    book[i].current_nofcopies--;
+    member[j].nobor++;
+    Borrowing[b].date_returened.day=0; //to make null in the file
+    b++;
+    }
+}else printf("There are no available copies right now");
+}else printf("User has already the maximum Number of borrowings");
+}else printf("User ID was not found");
+}else printf("Book ISBN was not found");
+printf("\nPress any key to Continue\n");
+getchar();
+}
+void return_book()
+{
+
+}
