@@ -14,12 +14,14 @@ typedef struct   /*Date Structure*/
     int month;
     int year;
 }Date;
+
 typedef struct  /*Address Structure*/
 {
     char build[10];
     char st[50];
     char city[50];
 }Address;
+
 struct Books
 {
     char title[200];
@@ -32,6 +34,7 @@ struct Books
     char cat[200];
     int nbor;
 }book[100];
+
 struct Members
 {
     char name[100];
@@ -42,6 +45,7 @@ struct Members
     char mail[100];
     int nobor; //Number of borrowings
 }member[100];
+
 struct Borrowings
 {
     char Isbn_bor[50];
@@ -77,177 +81,180 @@ int Validate_mail(char*email);
 
 int main()
 {
-char choice;
-read_fbook();
-read_fmember();
-read_fborrow();
-printf("\t\t\t>> Welcome To Our Library <<\n");
-printf("\t\t\t   **********************\n\n");
-while(1)
-{
-    //Printing The main menu
-    system("cls");
-    printf("Book Management(1)\n\n");
-    printf("Member Management(2)\n\n");
-    printf("Borrow Management(3)\n\n");
-    printf("Administrative Actions(4)\n\n");
-    printf("Save Changes(5)\n\n");
-    printf("Exit(6)\n\n");
-    printf("Please Enter Your Choice : ");
-    fflush(stdin); scanf("%c",&choice);
-switch(choice)
-{
-case '1' :          //Book Management menu
-{
-    system("cls");
-    printf("\t\t\t>> Book Management Department <<\n");
-    printf("\t\t\t   ************************** \n\n");
-    printf("Insert a new book(1)\n\n");
-    printf("Search for a book(2)\n\n");
-    printf("Add a new copy(3)\n\n");
-    printf("Delete book(4)\n\n");
-    printf("Print Books information(5)\n\n");
-    printf("Press any other key to go back to the main menu\n\n");
-    printf("enter your choice : ");
-    fflush(stdin); scanf("%c",&choice);
+    char choice;
+    read_fbook();
+    read_fmember();
+    read_fborrow();
+    printf("\t\t\t>> Welcome To Our Library <<\n");
+    printf("\t\t\t   **********************\n\n");
 
-    switch(choice)
+    while(1)
     {
-        case '1' :
-        insertnewbook();
-        break;
-        case '2' :
-        searchbooks();
-        break;
-        case '3' :
-        addnewcopy();
-        break;
-        case '4' :
-        deletebook();
-        break;
-        case '5' :
-        printbooks();
-        break;
-        default :
-        printf("\n\nGoing Back to main menu\n\n");
-        fflush(stdin);
+        //Printing The main menu
+        system("cls");
+        printf("Book Management(1)\n\n");
+        printf("Member Management(2)\n\n");
+        printf("Borrow Management(3)\n\n");
+        printf("Administrative Actions(4)\n\n");
+        printf("Save Changes(5)\n\n");
+        printf("Exit(6)\n\n");
+        printf("Please Enter Your Choice : ");
+        fflush(stdin); scanf("%c",&choice);
 
-    }
+        switch(choice)
+        {
 
-}break; //Exiting Switch ...
-case '2' :          //Member Management
-{
-    system("cls");
-    printf("\t\t\t>> Member Management Department <<");
-    printf("\n\t\t\t   ****************************\n\n");
-    printf("\nAdd a new Member(1)\n\n");
-    printf("\nRemove member(2)\n\n");
-    printf("\nPrint members(3)\n\n");
-    printf("\nPress any other key to go back to main menu\n\n");
-    printf("\nenter your choice : ");
-    getchar(); scanf("%c",&choice);
-    switch (choice)
-    {
-        case '1' :
-        addnewmem();
-        break;
-        case '2' :
-        remove_member();
-        break;
-        case '3' :
-        printmembers();
-        break;
-        default :
-        printf("\n\nGoing Back to main menu\n\n");
-        fflush(stdin);
-    }
-}break;
-case '3' :          //Borrow Management
-{
-    system("cls");
-    printf("\t\t\t >> Borrowing Management <<\n");
-    printf("\t\t\t    ********************\n\n");
-    printf("borrow book(1)\n\n");
-    printf("return book(2)\n\n");
-    printf("print borrows(3)\n\n");
-    printf("Press any other key to go back to main menu\n\n");
-    printf("enter your choice : ");
-    fflush(stdin); scanf("%c",&choice);
-    switch(choice)
-    {
-        case '1' :
-        borrow_book();
-        break;
-        case '2' :
-        return_book();
-        break;
-        case '3' :
-        print_borrow();
-        break;
-        default :
-        printf("\n\nGoing Back to main menu\n\n");
-        fflush(stdin);
-    }
-}break;
-case '4' :          //Administrative Actions
-{
-    system("cls");
-    printf("\t\t\t >> Administrative Actions <<\n");
-    printf("\t\t\t    **********************\n\n");
-    printf("Overdue book(1)\n\n");
-    printf("Show most popular books(2)\n\n");
-    printf("Press any key to go back to main menu\n\n");
-    printf("please enter your choice :");
-    getchar(); scanf("%c",&choice);
-    switch(choice)
-    {
-        case '1' :
-        Overdue_books();
-        break;
-        case '2' :
-        show_popbooks();
-        break;
-        default  :
-        printf("\n\nGoing Back to main menu\n\n");
-        fflush(stdin);
-    }
-}break;
-case '5' :          //saving process
-{
-    write_fbook();
-    write_fmember();
-    write_fborrow();
-    printf("\nData saved\n");
-    printf("\nPress Enter to Continue\n");
-    fflush(stdin); getchar();
+            case '1' :          //Book Management menu
+            {
+                system("cls");
+                printf("\t\t\t>> Book Management Department <<\n");
+                printf("\t\t\t   ************************** \n\n");
+                printf("Insert a new book(1)\n\n");
+                printf("Search for a book(2)\n\n");
+                printf("Add a new copy(3)\n\n");
+                printf("Delete book(4)\n\n");
+                printf("Print Books information(5)\n\n");
+                printf("Press any other key to go back to the main menu\n\n");
+                printf("enter your choice : ");
+                fflush(stdin); scanf("%c",&choice);
 
-}break;
-case '6' :           //Exit process
-{
-    printf("\nDo you want to save ?\npress (1) to save\npress (2) to exit\npress any other key to go back to the main menu\n");
-    printf("Enter your choice : ");
-    fflush(stdin); scanf("%c",&choice);
-    if(choice=='1')
-    {
-    write_fbook();
-    write_fmember();
-    write_fborrow();
-    printf("Data saved\nExiting . . .");
-    exit(0);
+                switch(choice)
+                {
+                    case '1' :
+                    insertnewbook();
+                    break;
+                    case '2' :
+                    searchbooks();
+                    break;
+                    case '3' :
+                    addnewcopy();
+                    break;
+                    case '4' :
+                    deletebook();
+                    break;
+                    case '5' :
+                    printbooks();
+                    break;
+                    default :
+                    printf("\n\nGoing Back to main menu\n\n");
+                    fflush(stdin);
+
+                }
+
+            }break; //Exiting Switch ...
+            case '2' :          //Member Management
+            {
+                system("cls");
+                printf("\t\t\t>> Member Management Department <<");
+                printf("\n\t\t\t   ****************************\n\n");
+                printf("\nAdd a new Member(1)\n\n");
+                printf("\nRemove member(2)\n\n");
+                printf("\nPrint members(3)\n\n");
+                printf("\nPress any other key to go back to main menu\n\n");
+                printf("\nenter your choice : ");
+                getchar(); scanf("%c",&choice);
+                switch (choice)
+                {
+                    case '1' :
+                    addnewmem();
+                    break;
+                    case '2' :
+                    remove_member();
+                    break;
+                    case '3' :
+                    printmembers();
+                    break;
+                    default :
+                    printf("\n\nGoing Back to main menu\n\n");
+                    fflush(stdin);
+                }
+            }break;
+            case '3' :          //Borrow Management
+            {
+                system("cls");
+                printf("\t\t\t >> Borrowing Management <<\n");
+                printf("\t\t\t    ********************\n\n");
+                printf("borrow book(1)\n\n");
+                printf("return book(2)\n\n");
+                printf("print borrows(3)\n\n");
+                printf("Press any other key to go back to main menu\n\n");
+                printf("enter your choice : ");
+                fflush(stdin); scanf("%c",&choice);
+                switch(choice)
+                {
+                    case '1' :
+                    borrow_book();
+                    break;
+                    case '2' :
+                    return_book();
+                    break;
+                    case '3' :
+                    print_borrow();
+                    break;
+                    default :
+                    printf("\n\nGoing Back to main menu\n\n");
+                    fflush(stdin);
+                }
+            }break;
+            case '4' :          //Administrative Actions
+            {
+                system("cls");
+                printf("\t\t\t >> Administrative Actions <<\n");
+                printf("\t\t\t    **********************\n\n");
+                printf("Overdue book(1)\n\n");
+                printf("Show most popular books(2)\n\n");
+                printf("Press any key to go back to main menu\n\n");
+                printf("please enter your choice :");
+                getchar(); scanf("%c",&choice);
+                switch(choice)
+                {
+                    case '1' :
+                    Overdue_books();
+                    break;
+                    case '2' :
+                    show_popbooks();
+                    break;
+                    default  :
+                    printf("\n\nGoing Back to main menu\n\n");
+                    fflush(stdin);
+                }
+            }break;
+            case '5' :          //saving process
+            {
+                write_fbook();
+                write_fmember();
+                write_fborrow();
+                printf("\nData saved\n");
+                printf("\nPress Enter to Continue\n");
+                fflush(stdin); getchar();
+
+            }break;
+            case '6' :           //Exit process
+            {
+                printf("\nDo you want to save ?\npress (1) to save\npress (2) to exit\npress any other key to go back to the main menu\n");
+                printf("Enter your choice : ");
+                fflush(stdin); scanf("%c",&choice);
+                if(choice=='1')
+                {
+                write_fbook();
+                write_fmember();
+                write_fborrow();
+                printf("Data saved\nExiting . . .");
+                exit(0);
+                }
+                else if(choice=='2') {printf("Exiting . . ."); exit(0); }
+                else printf("\nGoing back to main menu\n");
+                printf("\nPress Enter to Continue\n");
+                fflush(stdin); getchar();
+            }break;
+            default  :
+            {
+                printf("\n\nInvalid Input! Please Enter a valid choice\n\n");
+                fflush(stdin);
+            }
+        } //Exiting Switch
     }
-    else if(choice=='2') {printf("Exiting . . ."); exit(0); }
-    else printf("\nGoing back to main menu\n");
-    printf("\nPress Enter to Continue\n");
-    fflush(stdin); getchar();
-}break;
-default  :
-{
-    printf("\n\nInvalid Input! Please Enter a valid choice\n\n");
-    fflush(stdin);
-}
-} //Exiting Switch
-}
-return 0;
+    return 0;
 }
 //Primary Functions
                                 /*Book Management*/
@@ -964,8 +971,8 @@ void Overdue_books()
 
 }
                                 /*Read and write functions*/
-                                
-                                
+
+
 void read_fbook()
 {
     FILE*fbooks;
